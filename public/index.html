@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBAgent - AI Database Assistant</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <h1>🤖 DBAgent</h1>
+          <p class="subtitle">
+            AI-Powered Database Assistant with Context Memory
+          </p>
+        </div>
+        <div class="header-controls">
+          <div class="status-indicator">
+            <span class="status-dot" id="statusDot"></span>
+            <span class="status-text" id="statusText">Connecting...</span>
+          </div>
+          <button
+            class="btn-clear"
+            id="clearBtn"
+            title="Clear conversation history"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
+              />
+            </svg>
+            Clear History
+          </button>
+        </div>
+      </header>
+
+      <!-- Chat Messages -->
+      <div class="chat-container" id="chatContainer">
+        <div class="welcome-message">
+          <div class="welcome-icon">💬</div>
+          <h2>Welcome to DBAgent!</h2>
+          <p>I'm your AI-powered database assistant. I can help you:</p>
+          <ul>
+            <li>🔍 Query your database using natural language</li>
+            <li>📊 Analyze database schemas and relationships</li>
+            <li>📈 Generate insights from your data</li>
+            <li>🧠 Remember our conversation context</li>
+          </ul>
+          <p class="welcome-hint">
+            Try asking: "Show me all tables" or "Find customers who spent over
+            $1000"
+          </p>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="typing-indicator" id="typingIndicator" style="display: none">
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span class="typing-text">DBAgent is thinking...</span>
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <form id="chatForm">
+          <div class="input-container">
+            <textarea
+              id="messageInput"
+              placeholder="Ask me anything about your database..."
+              rows="1"
+              autocomplete="off"
+            ></textarea>
+            <button type="submit" class="btn-send" id="sendBtn">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </button>
+          </div>
+          <div class="input-hint">
+            <span
+              >💡 Tip: I remember our conversation context, so you can ask
+              follow-up questions!</span
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="toast" id="errorToast" style="display: none">
+      <div class="toast-content">
+        <span class="toast-icon">⚠️</span>
+        <span class="toast-message" id="toastMessage"></span>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
